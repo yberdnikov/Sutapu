@@ -7,8 +7,10 @@
 //
 
 #import "STPAuthViewController.h"
+#import "NSString+Utilities.h"
+#import <RestKit/RestKit.h>
 
-@interface STPAuthViewController ()
+@interface STPAuthViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -55,6 +57,80 @@
 - (IBAction)viewWasTapped:(UITapGestureRecognizer *)sender
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark - UITextField delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.emailTextField)
+        [self.passwordTextField becomeFirstResponder];
+    else
+    {
+        [self.passwordTextField resignFirstResponder];
+        [self loginUser];
+    }
+    
+    return YES;
+}
+
+#pragma mark - UIButton Selector
+
+- (IBAction)signInButtonPressed:(UIButton *)sender
+{
+    [self loginUser];
+}
+
+#pragma mark - Login user request
+
+- (void)loginUser
+{
+    if (!self.emailTextField.text.length || ![self.emailTextField.text isValidEmailFormat])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please enter valid email"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        [self.emailTextField becomeFirstResponder];
+        
+        return;
+    }
+    
+    if (!self.passwordTextField.text.length)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Password cannot be empty"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        [self.passwordTextField becomeFirstResponder];
+        
+        return;
+    }
+    
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:self.emailTextField.text, @"email",
+                            self.passwordTextField.text, @"password", nil];
+    
+    [[RKObjectManager sharedManager] getObjectsAtPath:@"/auth/local" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        
+//        [[WABDataProxy sharedDataProxy] setAccessToken:[response objectForKey:@"access_token"]];
+//        [[WABDataProxy sharedDataProxy] setLoggedUserInfo:[mappingResult firstObject]];
+        
+        //[self.delegate userWasLoggedIn:NO];
+        
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:error.localizedDescription
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "STPSignUpViewController.h"
+#import "NSString+Utilities.h"
+#import <RestKit/RestKit.h>
 
-@interface STPSignUpViewController ()
+@interface STPSignUpViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -74,7 +76,7 @@
 
 - (IBAction)signUpButtonPressed:(UIButton *)sender
 {
-    
+    [self signupUser];
 }
 
 - (IBAction)termsOfServiceButtonPressed:(UIButton *)sender
@@ -85,6 +87,77 @@
 - (IBAction)privacyPolicyButtonPressed:(UIButton *)sender
 {
     
+}
+
+#pragma mark - UITextField delegate methods
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return ![string isEqualToString:@" "];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.usernameTextField)
+        [self.emailTextField becomeFirstResponder];
+    else if (textField == self.emailTextField)
+        [self.passwordTextField becomeFirstResponder];
+    else
+    {
+        [self.view endEditing:YES];
+        [self signupUser];
+    }
+    
+    return YES;
+}
+
+#pragma mark - Sign up request
+
+- (void)signupUser
+{
+    if (!self.usernameTextField.text.length || !self.emailTextField.text.length ||
+        !self.passwordTextField.text.length)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"All fields must be filled!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    
+    if (![self.emailTextField.text isValidEmailFormat])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please enter a valid E-mail address"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        [self.emailTextField becomeFirstResponder];
+        
+        return;
+    }
+    
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:self.usernameTextField.text, @"displayName",
+                            self.emailTextField.text, @"email",
+                            self.passwordTextField.text, @"password", nil];
+    
+    [[RKObjectManager sharedManager] postObject:nil path:@"/user/create" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+
+        //[self.delegate userWasLoggedIn:YES];
+        
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:error.localizedDescription
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 @end

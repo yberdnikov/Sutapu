@@ -30,7 +30,55 @@
 		74372F4E179FDADA004DB591 /* STPFeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372F4D179FDADA004DB591 /* STPFeedsViewController.m */; };
 		74372F51179FE341004DB591 /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 74372F4F179FE341004DB591 /* back_button.png */; };
 		74372F52179FE341004DB591 /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74372F50179FE341004DB591 /* back_button@2x.png */; };
+		74372F64179FF12F004DB591 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74372F5B179FF067004DB591 /* libRestKit.a */; };
+		74372F66179FF141004DB591 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74372F65179FF141004DB591 /* CFNetwork.framework */; };
+		74372F68179FF148004DB591 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74372F67179FF148004DB591 /* CoreData.framework */; };
+		74372F6A179FF150004DB591 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74372F69179FF150004DB591 /* MobileCoreServices.framework */; };
+		74372F6C179FF158004DB591 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74372F6B179FF158004DB591 /* Security.framework */; };
+		74372F6E179FF15D004DB591 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74372F6D179FF15D004DB591 /* SystemConfiguration.framework */; };
+		74372F7B179FF3E5004DB591 /* STPErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372F7A179FF3E5004DB591 /* STPErrorInfo.m */; };
+		74372F7E179FF3FF004DB591 /* STPDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74372F7C179FF3FF004DB591 /* STPDataModel.xcdatamodeld */; };
+		74372F85179FF917004DB591 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372F84179FF917004DB591 /* NSString+Utilities.m */; };
+		74372FEC17A0083E004DB591 /* STPUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372FEB17A0083E004DB591 /* STPUserInfo.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74372F5A179FF067004DB591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74372F53179FF067004DB591 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		74372F5C179FF067004DB591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74372F53179FF067004DB591 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		74372F5E179FF067004DB591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74372F53179FF067004DB591 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		74372F60179FF067004DB591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74372F53179FF067004DB591 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		74372F62179FF126004DB591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74372F53179FF067004DB591 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25160D1514564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		74372EC3179FC547004DB591 /* Sutapu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sutapu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +111,21 @@
 		74372F4D179FDADA004DB591 /* STPFeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPFeedsViewController.m; sourceTree = "<group>"; };
 		74372F4F179FE341004DB591 /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		74372F50179FE341004DB591 /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
+		74372F53179FF067004DB591 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		74372F65179FF141004DB591 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		74372F67179FF148004DB591 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		74372F69179FF150004DB591 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		74372F6B179FF158004DB591 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		74372F6D179FF15D004DB591 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		74372F71179FF2DD004DB591 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		74372F79179FF3E5004DB591 /* STPErrorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPErrorInfo.h; sourceTree = "<group>"; };
+		74372F7A179FF3E5004DB591 /* STPErrorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPErrorInfo.m; sourceTree = "<group>"; };
+		74372F7D179FF3FF004DB591 /* STPDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = STPDataModel.xcdatamodel; sourceTree = "<group>"; };
+		74372F83179FF917004DB591 /* NSString+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utilities.h"; sourceTree = "<group>"; };
+		74372F84179FF917004DB591 /* NSString+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utilities.m"; sourceTree = "<group>"; };
+		74372FE617A004D5004DB591 /* STPAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPAuthDelegate.h; sourceTree = "<group>"; };
+		74372FEA17A0083E004DB591 /* STPUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPUserInfo.h; sourceTree = "<group>"; };
+		74372FEB17A0083E004DB591 /* STPUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPUserInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +133,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74372F6E179FF15D004DB591 /* SystemConfiguration.framework in Frameworks */,
+				74372F6C179FF158004DB591 /* Security.framework in Frameworks */,
+				74372F6A179FF150004DB591 /* MobileCoreServices.framework in Frameworks */,
+				74372F68179FF148004DB591 /* CoreData.framework in Frameworks */,
+				74372F66179FF141004DB591 /* CFNetwork.framework in Frameworks */,
+				74372F64179FF12F004DB591 /* libRestKit.a in Frameworks */,
 				74372F13179FD41C004DB591 /* QuartzCore.framework in Frameworks */,
 				74372EC7179FC547004DB591 /* UIKit.framework in Frameworks */,
 				74372EC9179FC547004DB591 /* Foundation.framework in Frameworks */,
@@ -100,6 +169,11 @@
 		74372EC5179FC547004DB591 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74372F6D179FF15D004DB591 /* SystemConfiguration.framework */,
+				74372F6B179FF158004DB591 /* Security.framework */,
+				74372F69179FF150004DB591 /* MobileCoreServices.framework */,
+				74372F67179FF148004DB591 /* CoreData.framework */,
+				74372F65179FF141004DB591 /* CFNetwork.framework */,
 				74372F12179FD41C004DB591 /* QuartzCore.framework */,
 				74372EC6179FC547004DB591 /* UIKit.framework */,
 				74372EC8179FC547004DB591 /* Foundation.framework */,
@@ -112,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				74372EE9179FC64F004DB591 /* 3rdParty */,
+				74372F82179FF917004DB591 /* Categories */,
 				74372EED179FC64F004DB591 /* View */,
 				74372EEA179FC64F004DB591 /* Controller */,
 				74372EEB179FC64F004DB591 /* Model */,
@@ -141,6 +216,7 @@
 		74372EE9179FC64F004DB591 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				74372F53179FF067004DB591 /* RestKit.xcodeproj */,
 			);
 			path = 3rdParty;
 			sourceTree = "<group>";
@@ -159,6 +235,10 @@
 		74372EEB179FC64F004DB591 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				74372F71179FF2DD004DB591 /* Constants.h */,
+				74372FE617A004D5004DB591 /* STPAuthDelegate.h */,
+				74372F74179FF355004DB591 /* DataTypes */,
+				74372F72179FF355004DB591 /* DataModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +316,53 @@
 			path = Feeds;
 			sourceTree = "<group>";
 		};
+		74372F54179FF067004DB591 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74372F5B179FF067004DB591 /* libRestKit.a */,
+				74372F5D179FF067004DB591 /* RestKitTests.octest */,
+				74372F5F179FF067004DB591 /* RestKit.framework */,
+				74372F61179FF067004DB591 /* RestKitFrameworkTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74372F72179FF355004DB591 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				74372F7C179FF3FF004DB591 /* STPDataModel.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		74372F74179FF355004DB591 /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				74372FEA17A0083E004DB591 /* STPUserInfo.h */,
+				74372FEB17A0083E004DB591 /* STPUserInfo.m */,
+				74372F78179FF3E5004DB591 /* ErrorInfo */,
+			);
+			path = DataTypes;
+			sourceTree = "<group>";
+		};
+		74372F78179FF3E5004DB591 /* ErrorInfo */ = {
+			isa = PBXGroup;
+			children = (
+				74372F79179FF3E5004DB591 /* STPErrorInfo.h */,
+				74372F7A179FF3E5004DB591 /* STPErrorInfo.m */,
+			);
+			path = ErrorInfo;
+			sourceTree = "<group>";
+		};
+		74372F82179FF917004DB591 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				74372F83179FF917004DB591 /* NSString+Utilities.h */,
+				74372F84179FF917004DB591 /* NSString+Utilities.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -250,6 +377,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				74372F63179FF126004DB591 /* PBXTargetDependency */,
 			);
 			name = Sutapu;
 			productName = Sutapu;
@@ -276,12 +404,49 @@
 			mainGroup = 74372EBA179FC547004DB591;
 			productRefGroup = 74372EC4179FC547004DB591 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 74372F54179FF067004DB591 /* Products */;
+					ProjectRef = 74372F53179FF067004DB591 /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				74372EC2179FC547004DB591 /* Sutapu */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		74372F5B179FF067004DB591 /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = 74372F5A179FF067004DB591 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		74372F5D179FF067004DB591 /* RestKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.octest;
+			remoteRef = 74372F5C179FF067004DB591 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		74372F5F179FF067004DB591 /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = 74372F5E179FF067004DB591 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		74372F61179FF067004DB591 /* RestKitFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.octest;
+			remoteRef = 74372F60179FF067004DB591 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		74372EC1179FC547004DB591 /* Resources */ = {
@@ -317,10 +482,22 @@
 				74372EF1179FC6CF004DB591 /* STPAuthViewController.m in Sources */,
 				74372F18179FD6CD004DB591 /* STPSignUpViewController.m in Sources */,
 				74372F4E179FDADA004DB591 /* STPFeedsViewController.m in Sources */,
+				74372F7B179FF3E5004DB591 /* STPErrorInfo.m in Sources */,
+				74372F7E179FF3FF004DB591 /* STPDataModel.xcdatamodeld in Sources */,
+				74372F85179FF917004DB591 /* NSString+Utilities.m in Sources */,
+				74372FEC17A0083E004DB591 /* STPUserInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		74372F63179FF126004DB591 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 74372F62179FF126004DB591 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		74372ECF179FC547004DB591 /* InfoPlist.strings */ = {
@@ -364,6 +541,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -388,6 +566,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -403,8 +582,11 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sutapu/Sutapu-Prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
 				INFOPLIST_FILE = "Sutapu/Sutapu-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -415,6 +597,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sutapu/Sutapu-Prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
 				INFOPLIST_FILE = "Sutapu/Sutapu-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,6 +627,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		74372F7C179FF3FF004DB591 /* STPDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				74372F7D179FF3FF004DB591 /* STPDataModel.xcdatamodel */,
+			);
+			currentVersion = 74372F7D179FF3FF004DB591 /* STPDataModel.xcdatamodel */;
+			path = STPDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 74372EBB179FC547004DB591 /* Project object */;
 }
