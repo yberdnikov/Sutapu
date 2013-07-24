@@ -11,6 +11,7 @@
 @interface STPDataProxy : NSObject
 
 @property(nonatomic, strong) STPUserInfo *loggedUserInfo;
+@property(nonatomic, copy) NSString *sailsID;
 
 + (STPDataProxy *)sharedDataProxy;
 

@@ -1,21 +1,20 @@
 //
-//  STPUserInfo.m
+//  STPPostInfo.m
 //  Sutapu
 //
 //  Created by Yuriy Berdnikov on 7/24/13.
 //  Copyright (c) 2013 Yuriy Berdnikov. All rights reserved.
 //
 
+#import "STPPostInfo.h"
 #import "STPUserInfo.h"
 
 
-@implementation STPUserInfo
+@implementation STPPostInfo
 
-@dynamic userID;
-@dynamic name;
-@dynamic email;
-@dynamic avatar;
-@dynamic bio;
-@dynamic posts;
+@dynamic postID;
+@dynamic text;
+@dynamic createdAt;
+@dynamic author;
 
 @end

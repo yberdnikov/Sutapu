@@ -11,6 +11,7 @@
 #import <RestKit/RestKit.h>
 #import "STPSignUpViewController.h"
 #import "STPDataProxy.h"
+#import "Constants.h"
 
 @interface STPAuthViewController () <UITextFieldDelegate>
 
@@ -126,6 +127,16 @@
     
     [[RKObjectManager sharedManager] getObjectsAtPath:@"/auth/local" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 
+        NSURL *serverURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@", kSutapuServerAddress]];
+        NSHTTPCookieStorage *cookiesStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        
+        [cookiesStorage.cookies enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSHTTPCookie *cookie = (NSHTTPCookie *)obj;
+            
+            if ([cookie.domain containsString:serverURL.host] && [cookie.name containsString:kSTPSailsIDCookieName])
+                [STPDataProxy sharedDataProxy].sailsID = cookie.value;
+        }];
+        
         [STPDataProxy sharedDataProxy].loggedUserInfo = [mappingResult firstObject];
         [self.delegate userWasLogged:NO];
         

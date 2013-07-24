@@ -17,6 +17,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbar_bg.png"]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selection.png"]];
+    
     [self setupRestKit];
     
     return YES;
@@ -87,6 +90,9 @@
     //user signup
     [objectManager addResponseDescriptor:[self userSignUpMapping:objectManager.managedObjectStore]];
     
+    //user info update
+    [objectManager addResponseDescriptor:[self userInfoUpdateMapping]];
+    
     /**
      Complete Core Data stack initialization
      */
@@ -156,6 +162,16 @@
                                                                                                      keyPath:nil
                                                                                                  statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     return userSignUpResponseDescriptor;
+}
+
+- (RKResponseDescriptor *)userInfoUpdateMapping
+{
+    RKResponseDescriptor *userInfoUpdateResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[RKObjectMapping mappingForClass:[NSArray class]]
+                                                                                                          method:RKRequestMethodPOST
+                                                                                                     pathPattern:@"/user/update/:userID"
+                                                                                                         keyPath:nil
+                                                                                                     statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return userInfoUpdateResponseDescriptor;
 }
 
 @end

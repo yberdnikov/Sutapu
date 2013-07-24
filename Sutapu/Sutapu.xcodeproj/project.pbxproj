@@ -39,7 +39,6 @@
 		74372F7B179FF3E5004DB591 /* STPErrorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372F7A179FF3E5004DB591 /* STPErrorInfo.m */; };
 		74372F7E179FF3FF004DB591 /* STPDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74372F7C179FF3FF004DB591 /* STPDataModel.xcdatamodeld */; };
 		74372F85179FF917004DB591 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372F84179FF917004DB591 /* NSString+Utilities.m */; };
-		74372FEC17A0083E004DB591 /* STPUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372FEB17A0083E004DB591 /* STPUserInfo.m */; };
 		74372FFA17A010DF004DB591 /* STPProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74372FF917A010DF004DB591 /* STPProfileViewController.m */; };
 		7437300417A03094004DB591 /* bio.png in Resources */ = {isa = PBXBuildFile; fileRef = 74372FFC17A03094004DB591 /* bio.png */; };
 		7437300517A03094004DB591 /* bio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74372FFD17A03094004DB591 /* bio@2x.png */; };
@@ -59,6 +58,16 @@
 		7437302417A05BD2004DB591 /* DAPageIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7437301F17A05BD2004DB591 /* DAPageIndicatorView.m */; };
 		7437302517A05BD2004DB591 /* DAPagesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7437302117A05BD2004DB591 /* DAPagesContainer.m */; };
 		7437302617A05BD2004DB591 /* DAPagesContainerTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7437302317A05BD2004DB591 /* DAPagesContainerTopBar.m */; };
+		7437302A17A06569004DB591 /* tabbar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7437302817A06569004DB591 /* tabbar_bg.png */; };
+		7437302B17A06569004DB591 /* tabbar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7437302917A06569004DB591 /* tabbar_bg@2x.png */; };
+		7437302E17A066B6004DB591 /* tabbar_selection.png in Resources */ = {isa = PBXBuildFile; fileRef = 7437302C17A066B6004DB591 /* tabbar_selection.png */; };
+		7437302F17A066B6004DB591 /* tabbar_selection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7437302D17A066B6004DB591 /* tabbar_selection@2x.png */; };
+		7437303417A06ADE004DB591 /* beaver.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7437303017A06ADE004DB591 /* beaver.jpg */; };
+		7437303517A06ADE004DB591 /* buckDeer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7437303117A06ADE004DB591 /* buckDeer.jpg */; };
+		7437303617A06ADE004DB591 /* cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7437303217A06ADE004DB591 /* cat.jpg */; };
+		7437303717A06ADE004DB591 /* lion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7437303317A06ADE004DB591 /* lion.jpg */; };
+		7437303A17A06C74004DB591 /* STPUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7437303917A06C74004DB591 /* STPUserInfo.m */; };
+		7437303D17A06C75004DB591 /* STPPostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7437303C17A06C75004DB591 /* STPPostInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,8 +152,6 @@
 		74372F83179FF917004DB591 /* NSString+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utilities.h"; sourceTree = "<group>"; };
 		74372F84179FF917004DB591 /* NSString+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utilities.m"; sourceTree = "<group>"; };
 		74372FE617A004D5004DB591 /* STPAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPAuthDelegate.h; sourceTree = "<group>"; };
-		74372FEA17A0083E004DB591 /* STPUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPUserInfo.h; sourceTree = "<group>"; };
-		74372FEB17A0083E004DB591 /* STPUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPUserInfo.m; sourceTree = "<group>"; };
 		74372FF817A010DF004DB591 /* STPProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPProfileViewController.h; sourceTree = "<group>"; };
 		74372FF917A010DF004DB591 /* STPProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPProfileViewController.m; sourceTree = "<group>"; };
 		74372FFC17A03094004DB591 /* bio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bio.png; sourceTree = "<group>"; };
@@ -169,6 +176,18 @@
 		7437302117A05BD2004DB591 /* DAPagesContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAPagesContainer.m; sourceTree = "<group>"; };
 		7437302217A05BD2004DB591 /* DAPagesContainerTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAPagesContainerTopBar.h; sourceTree = "<group>"; };
 		7437302317A05BD2004DB591 /* DAPagesContainerTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAPagesContainerTopBar.m; sourceTree = "<group>"; };
+		7437302817A06569004DB591 /* tabbar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_bg.png; sourceTree = "<group>"; };
+		7437302917A06569004DB591 /* tabbar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_bg@2x.png"; sourceTree = "<group>"; };
+		7437302C17A066B6004DB591 /* tabbar_selection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_selection.png; sourceTree = "<group>"; };
+		7437302D17A066B6004DB591 /* tabbar_selection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_selection@2x.png"; sourceTree = "<group>"; };
+		7437303017A06ADE004DB591 /* beaver.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = beaver.jpg; path = Tabbar/beaver.jpg; sourceTree = "<group>"; };
+		7437303117A06ADE004DB591 /* buckDeer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = buckDeer.jpg; path = Tabbar/buckDeer.jpg; sourceTree = "<group>"; };
+		7437303217A06ADE004DB591 /* cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = cat.jpg; path = Tabbar/cat.jpg; sourceTree = "<group>"; };
+		7437303317A06ADE004DB591 /* lion.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lion.jpg; path = Tabbar/lion.jpg; sourceTree = "<group>"; };
+		7437303817A06C74004DB591 /* STPUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPUserInfo.h; sourceTree = "<group>"; };
+		7437303917A06C74004DB591 /* STPUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPUserInfo.m; sourceTree = "<group>"; };
+		7437303B17A06C75004DB591 /* STPPostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPPostInfo.h; sourceTree = "<group>"; };
+		7437303C17A06C75004DB591 /* STPPostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPPostInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +335,11 @@
 		74372EF2179FC98E004DB591 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7437303017A06ADE004DB591 /* beaver.jpg */,
+				7437303117A06ADE004DB591 /* buckDeer.jpg */,
+				7437303217A06ADE004DB591 /* cat.jpg */,
+				7437303317A06ADE004DB591 /* lion.jpg */,
+				7437302717A06569004DB591 /* Tabbar */,
 				74372FFB17A02F9D004DB591 /* Profile */,
 				74372EF3179FC98E004DB591 /* Auth */,
 			);
@@ -387,8 +411,10 @@
 		74372F74179FF355004DB591 /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
-				74372FEA17A0083E004DB591 /* STPUserInfo.h */,
-				74372FEB17A0083E004DB591 /* STPUserInfo.m */,
+				7437303B17A06C75004DB591 /* STPPostInfo.h */,
+				7437303C17A06C75004DB591 /* STPPostInfo.m */,
+				7437303817A06C74004DB591 /* STPUserInfo.h */,
+				7437303917A06C74004DB591 /* STPUserInfo.m */,
 				74372F78179FF3E5004DB591 /* ErrorInfo */,
 			);
 			path = DataTypes;
@@ -444,6 +470,17 @@
 				7437302317A05BD2004DB591 /* DAPagesContainerTopBar.m */,
 			);
 			path = DAPagesContainer;
+			sourceTree = "<group>";
+		};
+		7437302717A06569004DB591 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				7437302C17A066B6004DB591 /* tabbar_selection.png */,
+				7437302D17A066B6004DB591 /* tabbar_selection@2x.png */,
+				7437302817A06569004DB591 /* tabbar_bg.png */,
+				7437302917A06569004DB591 /* tabbar_bg@2x.png */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,6 +601,14 @@
 				7437301817A056E6004DB591 /* avatar_border@2x.png in Resources */,
 				7437301B17A05947004DB591 /* default_avatar.png in Resources */,
 				7437301C17A05947004DB591 /* default_avatar@2x.png in Resources */,
+				7437302A17A06569004DB591 /* tabbar_bg.png in Resources */,
+				7437302B17A06569004DB591 /* tabbar_bg@2x.png in Resources */,
+				7437302E17A066B6004DB591 /* tabbar_selection.png in Resources */,
+				7437302F17A066B6004DB591 /* tabbar_selection@2x.png in Resources */,
+				7437303417A06ADE004DB591 /* beaver.jpg in Resources */,
+				7437303517A06ADE004DB591 /* buckDeer.jpg in Resources */,
+				7437303617A06ADE004DB591 /* cat.jpg in Resources */,
+				7437303717A06ADE004DB591 /* lion.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,12 +627,13 @@
 				74372F7B179FF3E5004DB591 /* STPErrorInfo.m in Sources */,
 				74372F7E179FF3FF004DB591 /* STPDataModel.xcdatamodeld in Sources */,
 				74372F85179FF917004DB591 /* NSString+Utilities.m in Sources */,
-				74372FEC17A0083E004DB591 /* STPUserInfo.m in Sources */,
 				74372FFA17A010DF004DB591 /* STPProfileViewController.m in Sources */,
 				7437300E17A03B73004DB591 /* STPDataProxy.m in Sources */,
 				7437302417A05BD2004DB591 /* DAPageIndicatorView.m in Sources */,
 				7437302517A05BD2004DB591 /* DAPagesContainer.m in Sources */,
 				7437302617A05BD2004DB591 /* DAPagesContainerTopBar.m in Sources */,
+				7437303A17A06C74004DB591 /* STPUserInfo.m in Sources */,
+				7437303D17A06C75004DB591 /* STPPostInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +773,7 @@
 				74372EE8179FC547004DB591 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

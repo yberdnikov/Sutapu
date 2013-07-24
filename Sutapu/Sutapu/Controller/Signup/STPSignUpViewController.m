@@ -10,6 +10,7 @@
 #import "NSString+Utilities.h"
 #import <RestKit/RestKit.h>
 #import "STPDataProxy.h"
+#import "Constants.h"
 
 @interface STPSignUpViewController () <UITextFieldDelegate>
 
@@ -148,9 +149,19 @@
                             self.passwordTextField.text, @"password", nil];
     
     [[RKObjectManager sharedManager] postObject:nil path:@"/user/create" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-
-        [self.delegate userWasLogged:YES];
+        
+        NSURL *serverURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@", kSutapuServerAddress]];
+        NSHTTPCookieStorage *cookiesStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        
+        [cookiesStorage.cookies enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSHTTPCookie *cookie = (NSHTTPCookie *)obj;
+            
+            if ([cookie.domain containsString:serverURL.host] && [cookie.name containsString:kSTPSailsIDCookieName])
+                [STPDataProxy sharedDataProxy].sailsID = cookie.value;
+        }];
+        
         [[STPDataProxy sharedDataProxy] setLoggedUserInfo:[mappingResult firstObject]];
+        [self.delegate userWasLogged:YES];
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"

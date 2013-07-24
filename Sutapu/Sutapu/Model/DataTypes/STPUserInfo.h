@@ -17,5 +17,14 @@
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * avatar;
 @property (nonatomic, retain) NSString * bio;
+@property (nonatomic, retain) NSSet *posts;
+@end
+
+@interface STPUserInfo (CoreDataGeneratedAccessors)
+
+- (void)addPostsObject:(NSManagedObject *)value;
+- (void)removePostsObject:(NSManagedObject *)value;
+- (void)addPosts:(NSSet *)values;
+- (void)removePosts:(NSSet *)values;
 
 @end

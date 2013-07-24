@@ -27,4 +27,95 @@
 	return [regExPredicate evaluateWithObject:self];
 }
 
+- (BOOL)isEmptyString
+{
+    if([self length] == 0)
+    {
+        //string is empty or nil
+        return YES;
+    }
+    else if([[self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0)
+    {
+        //string is all whitespace
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)containsString:(NSString *)string options:(NSStringCompareOptions)options
+{
+    NSRange rng = [self rangeOfString:string options:options];
+    return rng.location != NSNotFound;
+}
+
+- (BOOL)containsString:(NSString *)string
+{
+    return [self containsString:string options:0];
+}
+
+// f - 1, 21, 31, ...
+// s - 2-4, 22-24, 32-34 ...
+// t - 5-20, 25-30, ...
++ (NSString *)numpf:(NSInteger)n f:(NSString *)f s:(NSString *)s t:(NSString *)t
+{
+    NSInteger n10 = n % 10;
+    
+    if ((n10 == 1) && ((n == 1) || (n > 20)))
+        return f;
+    else if ((n10 > 1) && (n10 < 5) && ((n > 20) || (n < 10) ))
+        return s;
+    else
+        return t;
+}
+
++ (NSString *)timeStringFromUnixTime:(NSTimeInterval)timestamp
+{
+    NSDate *postedDate = [[NSDate alloc] initWithTimeIntervalSince1970:timestamp];
+    NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:postedDate];
+    
+    if (!interval)
+        return nil;
+    
+    NSInteger minute = 60;
+    NSInteger hour = 60 * minute;
+    NSInteger day = 24 * hour;
+    NSInteger month = 30 * day;
+    
+    if (interval < 2 * minute)
+        return NSLocalizedString(@"a minute ago", @"a minute ago");
+    if (interval < hour)
+    {
+        return [NSString stringWithFormat:@"%d %@", (int)interval / minute,
+                [NSString numpf:(int)interval / minute
+                              f:NSLocalizedString(@"one min ago", @"Text for minute (1, 21, 31)")
+                              s:NSLocalizedString(@"2-4 min ago", @"Text for minute in range 2-4")
+                              t:NSLocalizedString(@"5-10 min ago", @"Text for minute in range 2-4")]];
+    }
+    if (interval < 2 * hour)
+        return [NSString stringWithFormat:@"%d %@", (int)interval / hour, NSLocalizedString(@"hour ago", @"hour ago")];
+    if (interval < day)
+    {
+        return [NSString stringWithFormat:@"%d %@", (int)interval / hour,
+                [NSString numpf:(int)interval / hour
+                              f:NSLocalizedString(@"one hour ago", @"Text for hour (1, 21, 31)")
+                              s:NSLocalizedString(@"2-4 hour ago", @"Text for hour in range 2-4")
+                              t:NSLocalizedString(@"5-10 hour ago", @"Text for hour in range 2-4")]];
+    }
+    if (interval < 48 * hour)
+        return NSLocalizedString(@"yesterday", @"yesterday");
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale preferredLanguages] objectAtIndex:0]]];
+    
+    if (interval < 12 * month)
+        [dateFormat setDateFormat:@"dd MMMM"];
+    else
+        [dateFormat setDateFormat:@"dd MMMM YYYY"];
+    
+    NSString *dateString = [[dateFormat stringFromDate:postedDate] capitalizedString];
+    
+    return dateString;
+}
+
 @end

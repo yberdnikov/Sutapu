@@ -81,4 +81,26 @@
     return self.userInfo;
 }
 
+- (NSString *)sailsID
+{
+    NSString *sailsID = [[NSUserDefaults standardUserDefaults] objectForKey:kSTPSailsIDCookieName];
+    if (sailsID.length)
+    {
+        NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:@{NSHTTPCookieOriginURL : kSutapuServerAddress,
+                                                NSHTTPCookiePath : @"/",
+                                                NSHTTPCookieName : kSTPSailsIDCookieName,
+                                               NSHTTPCookieValue : sailsID}];
+        
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:@[cookie] forURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@", kSutapuServerAddress]] mainDocumentURL:nil];
+    }
+    
+    return sailsID;
+}
+
+- (void)setSailsID:(NSString *)sailsID
+{
+    [[NSUserDefaults standardUserDefaults] setObject:sailsID forKey:kSTPSailsIDCookieName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

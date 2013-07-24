@@ -12,5 +12,6 @@
 #define kSutapuServerAddress @"http://172.24.206.16:8080"
 
 #define kSTPLoggedUserID @"stp.loggedUser.id"
+#define kSTPSailsIDCookieName @"sails.sid"
 
 #endif
