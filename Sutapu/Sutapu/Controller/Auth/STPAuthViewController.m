@@ -9,6 +9,8 @@
 #import "STPAuthViewController.h"
 #import "NSString+Utilities.h"
 #import <RestKit/RestKit.h>
+#import "STPSignUpViewController.h"
+#import "STPDataProxy.h"
 
 @interface STPAuthViewController () <UITextFieldDelegate>
 
@@ -76,6 +78,12 @@
 
 #pragma mark - UIButton Selector
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    STPSignUpViewController *signupViewController = (STPSignUpViewController *)segue.destinationViewController;
+    signupViewController.delegate = self.delegate;
+}
+
 - (IBAction)signInButtonPressed:(UIButton *)sender
 {
     [self loginUser];
@@ -117,11 +125,9 @@
                             self.passwordTextField.text, @"password", nil];
     
     [[RKObjectManager sharedManager] getObjectsAtPath:@"/auth/local" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        
-//        [[WABDataProxy sharedDataProxy] setAccessToken:[response objectForKey:@"access_token"]];
-//        [[WABDataProxy sharedDataProxy] setLoggedUserInfo:[mappingResult firstObject]];
-        
-        //[self.delegate userWasLoggedIn:NO];
+
+        [STPDataProxy sharedDataProxy].loggedUserInfo = [mappingResult firstObject];
+        [self.delegate userWasLogged:NO];
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"

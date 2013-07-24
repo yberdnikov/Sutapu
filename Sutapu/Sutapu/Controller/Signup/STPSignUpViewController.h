@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STPAuthDelegate.h"
 
 @interface STPSignUpViewController : UIViewController
+
+@property (nonatomic, weak) id <STPAuthDelegate> delegate;
 
 @end

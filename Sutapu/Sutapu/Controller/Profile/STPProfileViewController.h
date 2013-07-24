@@ -1,5 +1,5 @@
 //
-//  STPFeedsViewController.h
+//  STPProfileViewController.h
 //  Sutapu
 //
 //  Created by Yuriy Berdnikov on 7/24/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STPFeedsViewController : UIViewController
+@interface STPProfileViewController : UIViewController
 
 @end

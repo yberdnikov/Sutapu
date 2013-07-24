@@ -9,6 +9,7 @@
 #import "STPSignUpViewController.h"
 #import "NSString+Utilities.h"
 #import <RestKit/RestKit.h>
+#import "STPDataProxy.h"
 
 @interface STPSignUpViewController () <UITextFieldDelegate>
 
@@ -148,7 +149,8 @@
     
     [[RKObjectManager sharedManager] postObject:nil path:@"/user/create" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 
-        //[self.delegate userWasLoggedIn:YES];
+        [self.delegate userWasLogged:YES];
+        [[STPDataProxy sharedDataProxy] setLoggedUserInfo:[mappingResult firstObject]];
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
