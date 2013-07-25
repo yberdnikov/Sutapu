@@ -11,6 +11,9 @@
 #import "Constants.h"
 #import "STPErrorInfo.h"
 #import "STPUserInfo.h"
+#import "STPPostInfo.h"
+#import "STPTopicInfo.h"
+#import "STPSubscriptionInfo.h"
 
 @implementation STPAppDelegate
 
@@ -19,6 +22,11 @@
     // Override point for customization after application launch.
     [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbar_bg.png"]];
     [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selection.png"]];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor colorWithWhite:220.0f / 255.0f alpha:1.0f] }
+                                             forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor whiteColor] }
+                                             forState:UIControlStateHighlighted];
     
     [self setupRestKit];
     
@@ -92,6 +100,21 @@
     
     //user info update
     [objectManager addResponseDescriptor:[self userInfoUpdateMapping]];
+    
+    //post
+    [objectManager addResponseDescriptor:[self postsMapping:objectManager.managedObjectStore]];
+    
+    //subscriptions
+    [objectManager addResponseDescriptor:[self subscriptionsMapping:objectManager.managedObjectStore]];
+    
+    //topic mapping
+    [objectManager addResponseDescriptor:[self topicsMapping:objectManager.managedObjectStore]];
+    
+    //new topic
+    [objectManager addResponseDescriptor:[self createNewTopicMapping:objectManager.managedObjectStore]];
+    
+    //new post
+    [objectManager addResponseDescriptor:[self createNewPostMapping]];
     
     /**
      Complete Core Data stack initialization
@@ -172,6 +195,92 @@
                                                                                                          keyPath:nil
                                                                                                      statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     return userInfoUpdateResponseDescriptor;
+}
+
+- (RKEntityMapping *)topicMapping:(RKManagedObjectStore *)managedObjectStore
+{
+    RKEntityMapping *userMapping = [RKEntityMapping mappingForEntityForName:@"STPUserInfo" inManagedObjectStore:managedObjectStore];
+    userMapping.identificationAttributes = @[ @"userID" ];
+    [userMapping addAttributeMappingsFromDictionary:@{@"id" : @"userID"}];
+    
+    RKEntityMapping *topicMapping = [RKEntityMapping mappingForEntityForName:@"STPTopicInfo" inManagedObjectStore:managedObjectStore];
+    topicMapping.identificationAttributes = @[ @"topicID" ];
+    [topicMapping addAttributeMappingsFromDictionary:@{@"id" : @"topicID", @"name" : @"name"}];
+    [topicMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"user" toKeyPath:@"user" withMapping:userMapping]];
+    
+    return topicMapping;
+}
+
+- (RKResponseDescriptor *)postsMapping:(RKManagedObjectStore *)managedObjectStore
+{
+    RKEntityMapping *postMapping = [RKEntityMapping mappingForEntityForName:@"STPPostInfo" inManagedObjectStore:managedObjectStore];
+    
+    postMapping.identificationAttributes = @[ @"postID" ];
+    [postMapping addAttributeMappingsFromDictionary:@{
+     @"id" : @"postID",
+     @"text" : @"text"
+     }];
+    
+    [postMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"user" toKeyPath:@"author" withMapping:[self userInfoMapping:managedObjectStore]]];
+    [postMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"topic" toKeyPath:@"topic" withMapping:[self topicMapping:managedObjectStore]]];
+
+    RKResponseDescriptor *postsResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:postMapping
+                                                                                                          method:RKRequestMethodGET
+                                                                                                     pathPattern:@"/post"
+                                                                                                         keyPath:nil
+                                                                                                     statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return postsResponseDescriptor;
+}
+
+- (RKResponseDescriptor *)subscriptionsMapping:(RKManagedObjectStore *)managedObjectStore
+{
+    RKEntityMapping *subscriptionsMapping = [RKEntityMapping mappingForEntityForName:@"STPSubscriptionInfo" inManagedObjectStore:managedObjectStore];
+    
+    subscriptionsMapping.identificationAttributes = @[ @"subscriptionID" ];
+    [subscriptionsMapping addAttributeMappingsFromDictionary:@{
+     @"id" : @"subscriptionID",
+     @"name" : @"name"
+     }];
+    
+    [subscriptionsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"user" toKeyPath:@"user" withMapping:[self userInfoMapping:managedObjectStore]]];
+    [subscriptionsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"topic" toKeyPath:@"topic" withMapping:[self topicMapping:managedObjectStore]]];
+    
+    RKResponseDescriptor *subscriptionsResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:subscriptionsMapping
+                                                                                                         method:RKRequestMethodGET
+                                                                                                    pathPattern:@"/subscription"
+                                                                                                        keyPath:nil
+                                                                                                    statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return subscriptionsResponseDescriptor;
+}
+
+- (RKResponseDescriptor *)topicsMapping:(RKManagedObjectStore *)managedObjectStore
+{
+    RKResponseDescriptor *topicsResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[self topicMapping:managedObjectStore]
+                                                                                                         method:RKRequestMethodGET
+                                                                                                    pathPattern:@"/topic/mine"
+                                                                                                        keyPath:nil
+                                                                                                    statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return topicsResponseDescriptor;
+}
+
+- (RKResponseDescriptor *)createNewTopicMapping:(RKManagedObjectStore *)managedObjectStore
+{
+    RKResponseDescriptor *createNewTopicResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[self topicMapping:managedObjectStore]
+                                                                                                          method:RKRequestMethodPOST
+                                                                                                     pathPattern:@"/topic/create"
+                                                                                                         keyPath:nil
+                                                                                                     statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return createNewTopicResponseDescriptor;
+}
+
+- (RKResponseDescriptor *)createNewPostMapping
+{
+    RKResponseDescriptor *createNewPostResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[RKObjectMapping mappingForClass:[NSArray class]]
+                                                                                                         method:RKRequestMethodPOST
+                                                                                                    pathPattern:@"/post/create"
+                                                                                                        keyPath:nil
+                                                                                                    statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return createNewPostResponseDescriptor;
 }
 
 @end

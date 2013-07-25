@@ -150,18 +150,30 @@
     
     [[RKObjectManager sharedManager] postObject:nil path:@"/user/create" parameters:params success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         
-        NSURL *serverURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@", kSutapuServerAddress]];
-        NSHTTPCookieStorage *cookiesStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-        
-        [cookiesStorage.cookies enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSHTTPCookie *cookie = (NSHTTPCookie *)obj;
+        NSDictionary *loginParams = [[NSDictionary alloc] initWithObjectsAndKeys:self.emailTextField.text, @"email", self.passwordTextField.text, @"password", nil];
+        [[RKObjectManager sharedManager] getObjectsAtPath:@"/auth/local" parameters:loginParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             
-            if ([cookie.domain containsString:serverURL.host] && [cookie.name containsString:kSTPSailsIDCookieName])
-                [STPDataProxy sharedDataProxy].sailsID = cookie.value;
+            NSURL *serverURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@", kSutapuServerAddress]];
+            NSHTTPCookieStorage *cookiesStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+            
+            [cookiesStorage.cookies enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                NSHTTPCookie *cookie = (NSHTTPCookie *)obj;
+                
+                if ([cookie.domain containsString:serverURL.host] && [cookie.name containsString:kSTPSailsIDCookieName])
+                    [STPDataProxy sharedDataProxy].sailsID = cookie.value;
+            }];
+            
+            [[STPDataProxy sharedDataProxy] setLoggedUserInfo:[mappingResult firstObject]];
+            [self.delegate userWasLogged:YES];
+            
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:error.localizedDescription
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
         }];
-        
-        [[STPDataProxy sharedDataProxy] setLoggedUserInfo:[mappingResult firstObject]];
-        [self.delegate userWasLogged:YES];
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"

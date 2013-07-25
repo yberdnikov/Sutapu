@@ -2,20 +2,39 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="STPPostInfo" representedClassName="STPPostInfo" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="postID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="postID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="author" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="STPUserInfo" inverseName="posts" inverseEntity="STPUserInfo" syncable="YES"/>
+        <relationship name="topic" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="STPTopicInfo" inverseName="posts" inverseEntity="STPTopicInfo" syncable="YES"/>
+    </entity>
+    <entity name="STPSubscriptionInfo" representedClassName="STPSubscriptionInfo" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscriptionID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STPTopicInfo" inverseName="subscriptions" inverseEntity="STPTopicInfo" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="STPUserInfo" inverseName="subscriptions" inverseEntity="STPUserInfo" syncable="YES"/>
+    </entity>
+    <entity name="STPTopicInfo" representedClassName="STPTopicInfo" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topicID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STPPostInfo" inverseName="topic" inverseEntity="STPPostInfo" syncable="YES"/>
+        <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STPSubscriptionInfo" inverseName="topics" inverseEntity="STPSubscriptionInfo" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="STPUserInfo" inverseName="topics" inverseEntity="STPUserInfo" syncable="YES"/>
     </entity>
     <entity name="STPUserInfo" representedClassName="STPUserInfo" syncable="YES">
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STPPostInfo" inverseName="author" inverseEntity="STPPostInfo" syncable="YES"/>
+        <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STPSubscriptionInfo" inverseName="user" inverseEntity="STPSubscriptionInfo" syncable="YES"/>
+        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STPTopicInfo" inverseName="user" inverseEntity="STPTopicInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="STPUserInfo" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="STPPostInfo" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="STPPostInfo" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="STPUserInfo" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="STPTopicInfo" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="STPSubscriptionInfo" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

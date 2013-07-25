@@ -13,8 +13,13 @@
 #import "DAPagesContainer.h"
 #import "Constants.h"
 #import "NSString+Utilities.h"
+#import "STPPostsViewController.h"
+#import <RestKit/RestKit.h>
 
 @interface STPHomeViewController () <STPAuthDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *createPostButton;
+@property (nonatomic, strong) NSArray *contentDataSource;
 
 @property (strong, nonatomic) DAPagesContainer *pagesContainer;
 
@@ -22,10 +27,21 @@
 
 @implementation STPHomeViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage imageNamed:@"home_tab.png"] tag:0];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -44,6 +60,8 @@
     self.pagesContainer.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:self.pagesContainer.view];
     [self.pagesContainer didMoveToParentViewController:self];
+    
+    [self.view bringSubviewToFront:self.createPostButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,9 +80,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UINavigationController *navigationController = segue.destinationViewController;
-    STPAuthViewController *authViewController = (STPAuthViewController *)navigationController.topViewController;
-    authViewController.delegate = self;
+    if ([segue.identifier isEqualToString:@"authControllerSegue"])
+    {
+        UINavigationController *navigationController = segue.destinationViewController;
+        STPAuthViewController *authViewController = (STPAuthViewController *)navigationController.topViewController;
+        authViewController.delegate = self;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,31 +107,49 @@
 
 - (void)loadData
 {
-    UIViewController *beaverViewController = [[UIViewController alloc] init];
-    UIImageView *beaverImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"beaver.jpg"]];
-    beaverImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [beaverViewController.view addSubview:beaverImageView];
-    beaverViewController.title = @"BEAVER";
+    __weak STPHomeViewController *weakSelf = self;
+    [[RKObjectManager sharedManager] getObjectsAtPath:@"/subscription" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        
+        weakSelf.contentDataSource = mappingResult.array;
+        [weakSelf buildSubscriptionsTabs];
+        
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:error.localizedDescription
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)buildSubscriptionsTabs
+{
+    __block NSMutableArray *controllers = [[NSMutableArray alloc] init];
     
-    UIViewController *buckDeerViewController = [[UIViewController alloc] init];
-    UIImageView *buckDeerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buckDeer.jpg"]];
-    buckDeerImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [buckDeerViewController.view addSubview:buckDeerImageView];
-    buckDeerViewController.title = @"BUCK DEER";
+    //in any case show recents posts
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    STPPostsViewController *postsController = [storyboard instantiateViewControllerWithIdentifier:@"postsViewController"];
+    postsController.showRecentsPosts = YES;
+    postsController.title = NSLocalizedString(@"Recents", @"Recents");
     
-    UIViewController *catViewController = [[UIViewController alloc] init];
-    UIImageView *catImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat.jpg"]];
-    catImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [catViewController.view addSubview:catImageView];
-    catViewController.title = @"CAT";
+    [controllers addObject:postsController];
     
-    UIViewController *lionViewController = [[UIViewController alloc] init];
-    UIImageView *lionImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lion.jpg"]];
-    lionImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [lionViewController.view addSubview:lionImageView];
-    lionViewController.title = @"REALLY CUTE LION";
+    if (!self.contentDataSource.count)
+    {
+        self.pagesContainer.viewControllers = controllers;
+        return;
+    }
     
-    self.pagesContainer.viewControllers = @[beaverViewController, buckDeerViewController, catViewController, lionViewController];
+    [self.contentDataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        STPPostsViewController *postsController = [storyboard instantiateViewControllerWithIdentifier:@"postsViewController"];
+        postsController.subscriptionInfo = obj;
+        postsController.title = postsController.subscriptionInfo.name;
+        
+        [controllers addObject:postsController];
+    }];
+    
+    self.pagesContainer.viewControllers = controllers;
 }
 
 @end
